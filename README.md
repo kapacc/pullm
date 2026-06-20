@@ -1,4 +1,4 @@
-# mdai26_pullm: PU Learning Benchmark for Polish Text Classification
+# pullm: PU Learning Benchmark for Polish Text Classification
 
 Minimal reproducible repository for PU (Positive-Unlabeled) learning benchmarks on Polish text datasets from SpeakLeash. This repository contains all code, tests, and pre-computed results needed to reproduce the benchmark published in the paper.
 
@@ -11,8 +11,8 @@ Minimal reproducible repository for PU (Positive-Unlabeled) learning benchmarks 
 Clone this repository and install dependencies:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/mdai26_pullm.git
-cd mdai26_pullm
+git clone https://github.com/YOUR_USERNAME/pullm.git
+cd pullm
 pip install -r requirements.txt
 pip install -e .
 ```
