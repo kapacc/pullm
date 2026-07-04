@@ -4,6 +4,7 @@
 \documentclass[applsci,article,submit,pdftex,moreauthors]{Definitions/mdpi}
 
 \usepackage{xr}
+\usepackage{booktabs}
 \IfFileExists{supplement.aux}{\externaldocument{supplement}}{}
 
 \setlength{\headheight}{20pt}
@@ -97,6 +98,22 @@ Throughout this work we adopt the \emph{single-scenario} formulation of PU learn
 
 The primary objective of this work is to evaluate six PU learning methods on Polish text quality classification tasks using the SpeakLeash corpora. We implemented a comprehensive benchmarking pipeline that controls for both the labelling mechanism and the estimation of the class-prior proxy $c$, enabling direct comparison of PU methods under non-SCAR settings.
 
+\begin{table}[H]
+\caption{Characteristics of the PU learning methods considered in the benchmark.}
+\label{tab:method_summary}
+\centering
+\begin{tabular}{llll}
+\toprule
+\textbf{Method} & \textbf{Type} & \textbf{Handles non-SCAR} & \textbf{Computational Cost} \\
+\midrule
+Naive      & Baseline PU           & No      & Low    \\
+Clust      & Cluster-based PU      & Partial & Medium \\
+LassoJoint & Propensity-aware PU   & Yes     & Medium \\
+Spy        & Reliable-negative PU  & Partial & Medium \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 % REV: PU methods subsection expanded and deep PU baselines explicitly discussed as out of scope for the single-scenario setting, per Reviewer 3.
 \subsection{PU Learning Methods}
 
@@ -185,14 +202,14 @@ Table~\ref{tab:datasets_composed} summarizes the datasets used in the current sc
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lllrrrrrrr}
 \toprule
-Dataset & Text type & Domain & Raw rows & Preprocessed rows & Feat & Neg Inst & Pos Inst & Pos \% & Mean Abs Corr \\
+Dataset & Text type & Raw rows & Preprocessed rows & Neg Inst & Pos Inst & Pos \% & Mean Abs Corr \\
 \midrule
-\texttt{ISAP\_corpus} & Legal & Law & 83 846 & 83 708 & 22 & 83 008 & 700 & 0.84 & 0.30 \\
-\texttt{job\_offers\_pl\_corpus} & Job offers & Internet / job offers & 895 651 & 868 899 & 22 & 722 770 & 146 129 & 16.82 & 0.32 \\
-\texttt{open\_subtitles\_corpus} & Dialogue & Dialogue & 63 153 & 49 232 & 22 & 17 677 & 31 555 & 64.09 & 0.31 \\
-\texttt{plwiki} & Encyclopedia & Internet / encyclopedia & 1 469 920 & 1 422 806 & 22 & 829 365 & 593 441 & 41.71 & 0.34 \\
-\texttt{ulotki\_medyczne} & Medical & Medical & 19 336 & 9 787 & 22 & 9 180 & 607 & 6.20 & 0.50 \\
-\texttt{wolne\_lektury\_corpus} & Literary prose & Prose & 6 619 & 6 087 & 22 & 3 786 & 2 301 & 37.80 & 0.39 \\
+\texttt{ISAP\_corpus} & Legal & 83 846 & 83 708 & 83 008 & 700 & 0.84 & 0.30 \\
+\texttt{job\_offers\_pl\_corpus} & Job offers & 895 651 & 868 899 & 722 770 & 146 129 & 16.82 & 0.32 \\
+\texttt{open\_subtitles\_corpus} & Dialogue & 63 153 & 49 232 & 17 677 & 31 555 & 64.09 & 0.31 \\
+\texttt{plwiki} & Encyclopedia & 1 469 920 & 1 422 806 & 829 365 & 593 441 & 41.71 & 0.34 \\
+\texttt{ulotki\_medyczne} & Medical & 19 336 & 9 787 & 9 180 & 607 & 6.20 & 0.50 \\
+\texttt{wolne\_lektury\_corpus} & Literary prose & 6 619 & 6 087 & 3 786 & 2 301 & 37.80 & 0.39 \\
 \bottomrule
 \end{tabular}%
 }
