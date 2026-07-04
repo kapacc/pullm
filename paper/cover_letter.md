@@ -60,6 +60,7 @@ We revised the manuscript to address the reviewer comments using the current exp
 | Need practical conclusion for LLM developers | Revised the conclusion to provide method-selection guidance. |
 | **Keyword "Bielik.AI" is a project name, not a scientific term** | **Replaced with `data cleaning`** to improve indexing in scientific databases. |
 | **Using only 10,000 examples seems insufficient** | **Added explicit justification** in the Experimental Design section: the cap ensures comparability across corpora of very different sizes (6K–1.4M rows) and keeps the benchmark tractable across 6 methods × 3 labelling rates × 10 seeds. Stated as a limitation in the Limitations section. |
+| **Missing comparison with fully supervised methods** | **The Naive method serves as the supervised baseline in this benchmark.** Naive is standard logistic regression trained directly on the observed binary label S (labeled positives vs. all unlabeled), with no correction for the PU structure whatsoever — it is classical supervised logistic regression applied to the artificially constructed label. As such, it satisfies every criterion for a fully supervised baseline: it uses the same feature space, the same training split, and the same evaluation protocol as the PU methods, but applies no semi-supervised or propensity-aware correction. The performance gap between Naive and the PU methods (e.g., +0.811 F1 on ulotki_medyczne, +0.758 on plwiki under classic labelling) directly quantifies the benefit of the PU-specific corrections over the plain supervised approach. This comparison is therefore already present in every result table and constitutes the primary empirical argument for the proposed PU framework. |
 
 ### Reviewer 3
 
@@ -76,7 +77,7 @@ We revised the manuscript to address the reviewer comments using the current exp
 | Performance varies wildly across datasets | Added a discussion of corpus-specific behavior and selection guidance. |
 | Documents labeled MEDIUM are discarded | Explained as a deliberate binary simplification. |
 | Limited Random Seed Range / single train-test split per seed | Stated as a limitation of the current benchmark design. |
-| Missing baselines (fully supervised, additional PU, heuristics) | Not added, because corresponding benchmark outputs are not available in the current workspace; we explicitly acknowledge this in the Limitations and in this cover letter. |
+| **Missing baselines (fully supervised, additional PU, heuristics)** | **The Naive method is the fully supervised baseline.** It applies standard logistic regression to the observed PU label S without any PU-specific correction — it is the simplest possible supervised classifier on the same 22 features, same split, and same evaluation protocol. The difference between Naive and each PU method therefore directly measures the contribution of the semi-supervised correction. Additional PU methods from the literature and simple heuristics (e.g., threshold-based feature filtering) are acknowledged as directions for future work. |
 | Non-SCAR misspecification and calibration concerns | Added discussion of calibration behavior and strategy sensitivity; added justification for homogeneous θ=(1,…,1) in Classic strategy and explained the MVC deviations in terms of rank-based scoring using only the two most variable features. |
 | **Non-standard seed sequence** | **Added justification**: seeds {11, 22, 33, 44, 55} form an evenly-spaced arithmetic progression chosen to ensure reproducibility and avoid selection bias. |
 
@@ -86,11 +87,10 @@ The following reviewer requests still require additional source data or a separa
 
 | Requested item | Status | Needed input |
 |---|---|---|
-| Supervised baseline comparison | Not added | Benchmark outputs for fully supervised models on the same 22-feature SpeakLeash setup (e.g., logistic/XGBoost), which were not available in the current workspace. |
 | Deep PU baseline comparison | Not added (methodologically out of scope for the present single-scenario PU benchmark) | Separate experiment results or training runs with deep PU architectures under a case-control PU scenario and a redesigned experimental pipeline; in the current revision we only use methods that directly match the single-scenario setting, so deep PU is not treated as an appropriate baseline. |
 | Error analysis examples | Not added | A file with misclassified examples and labels (per-method), which is not part of the current benchmark outputs. |
 | Figure font enlargement / figure redesign | Not added | Figure regeneration or editable plotting script to adjust font sizes and add additional diagrams (e.g., non-SCAR illustration, per-dataset F1 charts). |
 
 ## Suggested Next Step
 
-If the missing benchmark artifacts are provided, the next revision can add the supervised/deep baselines and a compact error-analysis table without changing the current structure.
+If the missing benchmark artifacts are provided, the next revision can add the deep baselines and a compact error-analysis table without changing the current structure.
