@@ -78,7 +78,7 @@ Table~\ref{tab:novelty_comparison} summarizes the substantive differences betwee
 \caption{Substantive novelty of the present manuscript relative to the our earlier non-SCAR study.}
 \label{tab:novelty_comparison}
 \small
-\begin{tabularx}{\textwidth}{lXX}
+\begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
 \toprule
 \textbf{Aspect} & \textbf{Earlier work} & \textbf{Present manuscript} \\
 \midrule
@@ -130,7 +130,7 @@ Table~\ref{tab:workflow_summary} gives a compact summary of the end-to-end bench
 \caption{End-to-end benchmark workflow used in the manuscript.}
 \label{tab:workflow_summary}
 \small
-\begin{tabularx}{\textwidth}{lXX}
+\begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
 \toprule
 \textbf{Stage} & \textbf{Input} & \textbf{Output / Purpose} \\
 \midrule
@@ -160,7 +160,7 @@ The original motivation for PU learning in Polish NLP stems from the Bielik mode
 \section{Datasets}
 SpeakLeash is an open-source ecosystem centered on Polish-language AI resources. According to the official package documentation, it provides a lightweight Python library for downloading and inspecting Polish datasets together with dataset manifests and metadata access~\cite{speakleash}.
 
-Our experiments use six SpeakLeash datasets selected to cover distinct domains and scales: \texttt{plwiki}, \texttt{open\_subtitles\_corpus}, \texttt{job\_offers\_pl\_corpus}, \texttt{ISAP\_corpus}, \texttt{ulotki\_medyczne}, and \texttt{wolne\_lektury\_corpus}~\cite{speakleash}. The selected corpora span encyclopedia-like content, dialogue, job offers, legal documents, medical texts, and literary prose. This mix allows us to test PU methods on both shorter and longer documents, as well as on sources with different vocabulary richness and style.
+Our experiments use six SpeakLeash datasets selected to cover distinct domains and scales~\cite{speakleash}. The selected corpora span encyclopedia-like content, dialogue, job offers, legal documents, medical texts, and literary prose. This mix allows us to test PU methods on both shorter and longer documents, as well as on sources with different vocabulary richness and style.
 
 \begin{itemize}
 \item \texttt{plwiki} is a Polish Wikipedia mirror containing encyclopedia entries across diverse topics; the dataset combines both longer structured articles and shorter stub entries.
