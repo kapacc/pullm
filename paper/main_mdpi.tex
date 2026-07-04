@@ -5,6 +5,8 @@
 
 \usepackage{xr}
 \usepackage{booktabs}
+\usepackage{booktabs}
+\usepackage{amssymb}   % dla \checkmark
 \IfFileExists{supplement.aux}{\externaldocument{supplement}}{}
 
 \setlength{\headheight}{20pt}
@@ -90,6 +92,26 @@ Interpretation & Method comparison focused on algorithmic behavior & Adds datase
 Reporting & Earlier benchmark summary & Expanded tables, stability analysis, runtime summaries, and reviewer-oriented interpretation \\
 \bottomrule
 \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\caption{Comparison of previous studies with the present work.}
+\label{tab:novelty}
+\centering
+\begin{tabular}{lllll}
+\toprule
+\textbf{Work} &
+\textbf{Application Domain} &
+\textbf{PU Learning} &
+\textbf{Non-SCAR} &
+\textbf{LLM Data Filtering} \\
+\midrule
+Liu et al.      & Text classification & $\checkmark$ & $\times$ & $\times$ \\
+FineWeb         & Web filtering       & Implicit     & $\times$ & $\checkmark$ \\
+Ociepa et al.   & Polish LLM          & $\times$     & $\times$ & $\checkmark$ \\
+\textbf{This work} & \textbf{Polish LLM} & \textbf{$\checkmark$} & \textbf{$\checkmark$} & \textbf{$\checkmark$} \\
+\bottomrule
+\end{tabular}
 \end{table}
 
 Throughout this work we adopt the \emph{single-scenario} formulation of PU learning~\cite{bekker2020survey}, in which the learner observes an i.i.d.\ sample of pairs $(X, S)$, where $S=1$ implies $Y=1$, while observations with $S=0$ are unlabeled and arise from a mixture of positive and negative instances. This stands in contrast to the \emph{case-control} scenario, where separate i.i.d.\ samples from $p(\mathbf{x}\mid Y=1)$ and from the marginal $p(\mathbf{x})$ are available. The single-scenario setting is the natural one for our use case: the SpeakLeash corpora arrive as a single collection in which only a fraction of high-quality documents carries an explicit \texttt{HIGH} label, while the remaining documents are left unlabelled regardless of their true quality.
