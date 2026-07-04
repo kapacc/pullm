@@ -1,0 +1,408 @@
+Please revise the manuscript found at the above link according to the 
+reviewers' comments and upload the revised file within 10 days. Note the 
+following check-list: 
+ 
+(I) Ensure all references are relevant to the content of the manuscript. 
+(II) Highlight any revisions to the manuscript, so editors and reviewers can 
+see any changes made. 
+(III) Provide a cover letter to respond to the reviewers’ comments and 
+explain, point by point, the details of the manuscript revisions. 
+(IV) If the reviewer(s) recommended references, critically analyze them to 
+ensure that their inclusion would enhance your manuscript. If you believe 
+these references are unnecessary, you should not include them. 
+(V) If you found it impossible to address certain comments in the review 
+reports, include an explanation in your appeal. 
+ 
+Please note additional reviewers just agreed to review the original version 
+of the manuscript. We will send other reports later and extend the due time 
+for your revision. You may revise the manuscript according to the current 
+review reports at this moment. Please kindly notice that this revision 
+request is not a guarantee of acceptance. 
+ 
+Our expert editors offer professional Language and Figure Editing, each 
+completed within 1 day. These optional services ensure the high standard 
+required to publish your work with clarity and boost its impact. You can 
+submit here: 
+https://susy.mdpi.com/user/author_services/new/revision_email?hash_key=64eb226aade2d5c4ce46b02c1af84c17 
+ 
+Please do not hesitate to contact us if you have any questions regarding the 
+revision of your manuscript or if you need more time. We look forward to 
+hearing from you soon. 
+ 
+Kind regards, 
+Ms.Ayra Shi 
+Assistant Editor 
+E-Mail: ayra.shi@mdpi.com 
+
+ 
+
+ 
+
+Quality of English Language 
+
+Reviewer 1Round 1The English could be improved to more clearly express the research. 
+
+Quality of Figures 
+
+Reviewer 1Round 1Figures and tables can be improved 
+
+Reviewer 2Round 1Figures and tables must be improved 
+
+ 
+
+Rev1 
+
+ 
+
+Review Report Form 
+
+Quality of English Language 
+
+(x) The English could be improved to more clearly express the research. 
+( ) The English is fine and does not require any improvement. 
+
+ 
+
+Yes 
+
+Can be improved 
+
+Must be improved 
+
+Not applicable 
+
+Does the introduction provide sufficient background and include all relevant references? 
+
+( ) 
+
+( ) 
+
+(x) 
+
+( ) 
+
+Is the research design appropriate? 
+
+( ) 
+
+( ) 
+
+(x) 
+
+( ) 
+
+Are the methods adequately described? 
+
+( ) 
+
+(x) 
+
+( ) 
+
+( ) 
+
+Are the results clearly presented? 
+
+( ) 
+
+(x) 
+
+( ) 
+
+( ) 
+
+Are the conclusions supported by the results? 
+
+( ) 
+
+( ) 
+
+(x) 
+
+( ) 
+
+Are all figures and tables clear and well-presented? 
+
+( ) 
+
+(x) 
+
+( ) 
+
+( ) 
+
+Comments and Suggestions for Authors 
+
+The relevant research literature cited in this article for 2026 is insufficient, with at least 10 relevant studies from 2026 cited. 
+
+It is necessary to analyze and clarify what substantive innovations this study has compared to previous work. Reflected in the form of a table. 
+
+It is necessary to clarify and supplement the basis for selecting PU learning methods. 
+
+Add a separate chapter to provide a comprehensive analysis of the limitations of this study. 
+
+Add model training time and inference time data for various PU methods in the table. 
+
+The author needs to study and reveal which PU method should be selected under what data conditions to enhance the guiding value of the paper. 
+
+The reference citation format at the end of the article does not comply with MDPI standards and needs to be modified. 
+
+ 
+Rev2 
+
+ 
+
+Review Report Form 
+
+Quality of English Language 
+
+( ) The English could be improved to more clearly express the research. 
+(x) The English is fine and does not require any improvement. 
+
+ 
+
+Yes 
+
+Can be improved 
+
+Must be improved 
+
+Not applicable 
+
+Does the introduction provide sufficient background and include all relevant references? 
+
+( ) 
+
+( ) 
+
+(x) 
+
+( ) 
+
+Is the research design appropriate? 
+
+( ) 
+
+( ) 
+
+(x) 
+
+( ) 
+
+Are the methods adequately described? 
+
+( ) 
+
+( ) 
+
+(x) 
+
+( ) 
+
+Are the results clearly presented? 
+
+( ) 
+
+( ) 
+
+(x) 
+
+( ) 
+
+Are the conclusions supported by the results? 
+
+( ) 
+
+( ) 
+
+(x) 
+
+( ) 
+
+Are all figures and tables clear and well-presented? 
+
+( ) 
+
+( ) 
+
+(x) 
+
+( ) 
+
+Comments and Suggestions for Authors 
+
+The manuscript is devoted to the study of learning methods based on positive and unlabeled data (PU learning) for classifying the quality of Polish texts intended for training large language models. The authors propose a software implementation in Python of six different PU methods and evaluate their effectiveness on six datasets from the SpeakLeash ecosystem, using the AUC, PR-AUC and F1 metrics. The main attention is paid to the work under the conditions of violation of the assumption of random selection of labels (non-SCAR), which is modeled through special labeling strategies. Despite the relevance of data cleaning for LLMs, the presented work has significant shortcomings in scientific novelty and the depth of experimental comparison. 
+
+Critical Comments 
+
+The Abstract completely lacks quantitative results of the experiments, which is unacceptable for a technical article. It is necessary to add specific values of the F1 metric for the best configurations and indicate by how many percent the proposed PU methods outperform the basic "Naive" approach. 
+
+On p. 2, lines 74-76 the authors explicitly state that the full experimental pipeline is a “Python reimplementation” of a previous work. In a scientific article of this level, a simple change in the programming language cannot be considered a major contribution. It is necessary to clearly formulate what new scientific aspects or methodological improvements have been made compared to the works [2, 3] in order to justify the feasibility of a new publication. 
+
+The introduction lacks a clear list of scientific contributions, which is a standard for modern articles in computer science. The reader cannot quickly identify what is new: methodology, dataset, or testing results. 
+
+The article does not have a separate section for analyzing the current state of research. Although some references are given in the introduction, they are outdated or relate only to a narrow range of authors’ works. It is necessary to analyze modern data filtering methods for LLM, such as those used in FineWeb (reference [8]), and compare them theoretically with your PU approach. 
+
+The description of the six PU methods (p. 3, lines 91-127) is presented in the form of a simple list without any visual diagrams or algorithmic description (pseudocode). This makes it much more difficult for other researchers to reproduce the results. A graphical diagram of the overall process (workflow) should be added, which would demonstrate the stages from receiving the raw SpeakLeash data to the final evaluation of the classification model. 
+
+I note that on p. 5, lines 205-210, the process of creating a target label (PU target) looks too simplified: the authors simply remove the labels “MEDIUM”, leaving only “HIGH” and “LOW”. It is necessary to justify whether such removal of a significant part of the data does not bias the results and how this affects the real suitability of the model for LLM, where “average” quality is common. 
+
+Also, in the ISAP_corpus dataset (p. 6, Table 2) there are only 0.84% positive instances (Pos %), which indicates an extreme class imbalance. However, the article does not discuss how the selected PU learning methods address this imbalance. It is necessary to add an analysis of whether the results obtained on this dataset are not random due to the extremely small number of positive examples. 
+
+In Table 3 on p. 7, the execution time (Time [s]) for the plwiki dataset (classic method) is 30.714 ± 10.809 seconds, which is significantly higher than the others. An explanation for such high computational complexity and large standard deviation is necessary. 
+
+Also, on p. 8, Table 4 in the results for ISAP, the F1 values for Naive, Clust, S-LassClust and others are equal to 0.000 or close to zero (0.006). This indicates a complete failure of classification in this domain. The authors should analyze in detail why PU methods do not work on legal texts, otherwise the scientific value of these experiments remains questionable. 
+
+Also, on p. 8, Table 4 and 5, the comparison of results between MVC and Classic strategies is only superficial. It is necessary to conduct statistical tests (e.g. t-test or Wilcoxon test) to confirm whether the difference between the results of these strategies is statistically significant. A simple comparison of the mean F1 values is not enough to validate scientific conclusions. 
+
+The lack of a Discussion section prevents the authors from explaining why the LassoJoint model turned out to be better on certain domains (e.g., plwiki) and Spy on others. 
+
+The text lacks a comparison with non-PU classifiers. Since the goal is to create a high-quality filter for LLM, it would be logical to compare the PU approach with fully supervised learning on the same amount of data to show the advantages of the PU scenario in conditions of limited labels. 
+
+Using only 10,000 examples for training (page 4, line 140) seems extremely insufficient for LLM tasks. Modern data filters are trained on millions of examples. It is necessary to explain why such a small sample was chosen and how this affects the model's ability to generalize to real data. 
+
+The conclusions of the article are too general: "no method is best." It is necessary to formulate practical recommendations for LLM developers: which PU-learning method and under what conditions (corpus type, noise level in labels) should be chosen for cleaning Polish-language texts. 
+
+The list of keywords contains “Bielik.AI”, which is the name of a specific project, not a scientific term. It should be replaced with more general and relevant terms, such as “Natural Language Processing” or “Data Cleaning”, to ensure better indexing of the article in scientific databases. 
+
+The authors refuse to use deep neural network architectures (GAN, VAE) due to computational complexity. However, without comparison with at least one modern neural network PU-learning model, the work looks outdated, since it is based only on logistic regression and clustering. 
+
+The reference to the source [1] (SpeakLeash) refers to the library documentation. References to peer-reviewed scientific publications describing these datasets, if any, should be included to support the validity of the data sources used in your study. 
+
+Suggestions for Improvement 
+
+It would be useful to include a diagram illustrating the concept of non-SCAR labeling in the context of text quality. A visual explanation of why longer or “more complex” texts are more likely to receive labels from annotators would help to better understand the motivation for using PU methods. 
+
+It is suggested to include a section with a computational complexity analysis (Big O notation) for each of the six methods. This is important for LLM developers who have to process terabytes of data and need to know whether the chosen algorithm is fast enough. 
+
+Add a column to Table 2 with information about the type of text in each dataset (e.g. “formal”, “informal”, “technical”). This will help to better interpret the differences in classification results between different SpeakLeash domains. 
+
+It would be very useful to add a qualitative analysis (Error Analysis). Provide examples of texts that were incorrectly classified by the models and analyze which features (e.g., specific punctuation or word length) misled the algorithm. 
+
+It is advisable to end the article with a more ambitious prediction. For example, indicate how your Python pipeline can be integrated into popular data processing libraries (such as Hugging Face Datasets) to facilitate the work of other Polish LLM researchers. 
+
+Overall conclusion: the work has critical shortcomings, in particular, low scientific novelty, since it is positioned mainly as a software reimplementation of the authors' previous research. The lack of an in-depth comparison with modern neural network approaches, the unsatisfactory interpretation of null results in some domains, and the lack of quantitative indicators in the abstract and conclusions do not allow us to recommend the article for publication, since the identified methodological and presentational shortcomings require a fundamental rethinking of the scientific contribution and the conduct of new experiments. 
+
+ 
+Rev3 
+
+ 
+
+Review Report Form 
+
+Quality of English Language 
+
+( ) The English could be improved to more clearly express the research. 
+(x) The English is fine and does not require any improvement. 
+
+ 
+
+Yes 
+
+Can be improved 
+
+Must be improved 
+
+Not applicable 
+
+Does the introduction provide sufficient background and include all relevant references? 
+
+(x) 
+
+( ) 
+
+( ) 
+
+( ) 
+
+Is the research design appropriate? 
+
+(x) 
+
+( ) 
+
+( ) 
+
+( ) 
+
+Are the methods adequately described? 
+
+(x) 
+
+( ) 
+
+( ) 
+
+( ) 
+
+Are the results clearly presented? 
+
+(x) 
+
+( ) 
+
+( ) 
+
+( ) 
+
+Are the conclusions supported by the results? 
+
+(x) 
+
+( ) 
+
+( ) 
+
+( ) 
+
+Are all figures and tables clear and well-presented? 
+
+(x) 
+
+( ) 
+
+( ) 
+
+( ) 
+
+Comments and Suggestions for Authors 
+
+This paper proposes a new method “PU-Based Quality Classifier for LLM Training Texts”. After reviewing the paper, I have the following comments. 
+
+[1]     Authors can summarize the findings of the literature survey in form of table with relative merits and reference numbers in section 1. The authors can extend the literature survey and related work in section 1. 
+
+[2]     Please highlight the relative merits and limitations of the related past research in form of table for clear comparisons in section 1. 
+
+[3]     Enlarge the fonts labels in figure 1 for better presentation. 
+
+[4]     The study uses only 22 stylometric features available in the SpeakLeash repository, whereas the original Bielik model used 266 features. This substantial reduction likely compromises classification performance. The paper itself acknowledges this limitation (Section 6), noting that Ociepa et al. achieved F1 of 0.84 with full feature set, while this study's best results are considerably lower (e.g., LassoJoint 0.665 on ulotki_medyczne). 
+
+[5]     Deep generative PU architectures (VAE-PU+OCC, GAN-based models) were excluded due to "computational constraints" (Section 2.1). This creates a significant gap in the evaluation, as these methods often outperform traditional statistical approaches on complex text data. Justification weakens the study: The paper cites computational cost but doesn't quantify it or explore alternatives like reduced-epoch training. 
+
+[6]     I concern about the inconsistent performance baseline. The Naive method performs at or near zero F1 for most datasets (e.g., 0.000 on ISAP, job_offers, ulotki; 0.019 on plwiki), suggesting the binary classification setup may be fundamentally flawed or the features are insufficiently discriminative. This raises questions about whether the PU methods are actually learning meaningful patterns or merely exploiting artifacts of the labeling mechanism. 
+
+[7]     AUC as "Supportive, Illustrative Metric". The paper states F1 is the focus because "optimizing decision thresholds is typically impractical in LLM training." AUC is threshold-independent and provides complementary information. Dismissing it as merely "illustrative" while reporting it in supplementary material suggests selective reporting of favorable metrics. While   were tested, the stability analysis only reports   (Table 3). This incomplete reporting makes it difficult to assess labeling stability across the full experimental range. 
+
+[8]     The homogeneous coefficient vector   assumes all features contribute equally to labeling propensity. There may be problem of unrealistic assumption: In real annotation pipelines, different features (e.g., document length vs. lexical density) likely have different impacts on labeling probability. The grid search over α uses only 401 points on [-10,10], which may be insufficient for precise calibration. 
+
+[9]     For the MVC (Rank-Based) Issues. The paper uses only the two features with the highest variance for scoring. This may be an arbitrary choice that no justification is provided for why exactly two features are optimal, or what features are selected for each dataset. The deterministic nature (zero variance across seeds) may create systematic bias that doesn't reflect real-world labeling stochasticity. 
+
+[10]   The performance of proposed method varies wildly across datasets. For example, under classic labeling (1) LassoJoint: 0.777 (open_subtitles) vs. 0.000 (ISAP) (2) Spy: 0.019 (ISAP) vs. 0.578 (plwiki). Therefore, the methods lack robustness across domains, making practical deployment risky without extensive per-dataset tuning. 
+
+[11]   Many methods achieve F1 = 0.000 on ISAP_corpus (legal documents) under both labeling strategies. This suggests the methods fail catastrophically on certain text types, likely due to the specialized vocabulary and formal structure of legal texts not being captured by the 22 stylometric features. The paper references Ociepa et al.'s F1 of 0.84 but doesn't provide a direct supervised baseline using the same 22 features. Without this comparison, it's unclear whether the PU methods are performing well or merely doing the best possible with inadequate features. 
+
+[12]   Documents labeled MEDIUM in the SpeakLeash corpora are discarded (Section 2.2). As the paper notes, MEDIUM documents "represent untapped potential for LLM training after refined text separation." Discarding them reduces dataset size and potentially biases the remaining HIGH/LOW split. The paper frames PU learning as suitable for this scenario, but the experimental setup removes the very ambiguity that PU methods are designed to handle. 
+
+[13]   The paper only considers limited Random Seed Range. Stability analysis uses only five seeds (11, 22, 33, 44, 55) - a non-random, arbitrary sequence. Why not use standard random seeds or a larger sample? The limited range reduces confidence in stability claims? 
+
+[14]   Single Train-Test Split per Seed. The 70/30 split is performed once per seed with a fixed random seed. Without cross-validation or multiple splits, results may be sensitive to the specific train/test partition. The paper has missing Baseline Comparisons. There are no comparisons to (1) Fully supervised methods on the same 22 features (2) Alternative PU methods from the literature beyond the six tested (3) Simple heuristics (e.g., threshold-based filtering using individual features) 
+
+[15]   The paper correctly identifies that real-world labeling is non-SCAR but doesn't fully address: (1) How to verify the labeling mechanism in practice (2) The impact of propensity misspecification on classification performance (3) Whether the proposed methods are robust to different forms of non-SCAR. The class-prior proxy   is estimated during labeling, but: (1) No method is provided to verify this estimate on held-out data (2) The impact of estimation error on downstream classification is not analyzed (3) For MVC, achieving   values deviating from target (e.g., 0.088 vs 0.2 on plwiki, Table 3) suggests significant miscalibration 
+
+[16]   Authors could consider adding data chart to illustrate results of the proposed method in section 6. The original contributions of the paper are not very clear, and the authors could explain more about the merits of the proposed method in section 6. Authors could expand the conclusion section 6 to describe more about the original contributions of the paper. 
+
+  
+
+ 
+
+ 
