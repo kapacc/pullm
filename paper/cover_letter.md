@@ -5,6 +5,7 @@
 
 ## Revision Summary
 
+We would like to sincerely thank the Reviewers for their careful reading of our manuscript and for their constructive and valuable comments. Their insightful suggestions have significantly improved the present version of the manuscript.
 We revised the manuscript to address the reviewer comments using the current experimental data and the existing benchmark outputs. The revision strengthens the scientific contribution, improves interpretability, and adds reviewer-requested structure for novelty, workflow, and method selection.
 
 ## Changes Implemented
@@ -36,13 +37,13 @@ We revised the manuscript to address the reviewer comments using the current exp
 |---|---|
 | English could be improved | The manuscript text was tightened and clarified in the revised sections. |
 | Figures and tables can be improved | Added clearer tables for novelty, workflow, dataset types, runtime, and method selection. |
-| 2026 literature is insufficient | Added several published 2026 references: (1) Emami Gohari et al., *GneissWeb: Preparing High Quality Data for LLMs at Scale*, ICLR 2026 — cited in the Introduction and Related Work to contextualize large-scale LLM data filtering; (2) Wang et al., *Accessible, Realistic, and Fair Evaluation of Positive-Unlabeled Learning Algorithms*, ICLR 2026 — cited in Related Work to ground the reproducible PU benchmarking motivation; (3) Negoiță et al., *Improving Romanian LLM Pretraining Data Using Diversity and Quality Filtering*, LoResLM 2026 — cited to illustrate classifier-based filtering for under-resourced languages; (4) Nait Saada et al., *The Data-Quality Illusion: Rethinking Classifier-Based Quality Filtering for LLM Pretraining*, ICLR 2026 — cited in the discussion of classifier-based filters as a limitation; (5) Dai et al., *Positive-Unlabeled Learning with Extreme Scarcity of Labeled Positives*, ICML 2026 — cited in the discussion of extreme label scarcity and PU generalization bounds. |
-| Need to clarify substantive innovations | Added an explicit novelty comparison table and contribution list. |
-| Need to justify PU method selection | Added a method-selection rationale and guidance table. |
-| Need a limitations section | Added a separate Limitations section. |
-| Need model training and inference time data | Added aggregated runtime summaries; isolated inference timing is not available in the current outputs. |
-| Need practical guidance on when to choose which PU method | Added a method-selection guide in the supplement and strengthened the conclusion. |
-| **Reference citation format does not comply with MDPI standards** | **All references reformatted to MDPI ACS-style**: `Author, I.N. Title. *Journal* **Year**, *vol*, pp. DOI`. Conference proceedings follow MDPI's `In *Proceedings of...*; Publisher: Place, Year; pp. X–Y.` format. Software references use `Title; Version; Publisher: Place, Year.` format. |
+| The relevant research literature cited in this article for 2026 is insufficient, with at least 10 relevant studies from 2026 cited. | Added several published 2026 references: (1) Emami Gohari et al., *GneissWeb: Preparing High Quality Data for LLMs at Scale*, ICLR 2026 — cited in the Introduction and Related Work to contextualize large-scale LLM data filtering; (2) Wang et al., *Accessible, Realistic, and Fair Evaluation of Positive-Unlabeled Learning Algorithms*, ICLR 2026 — cited in Related Work to ground the reproducible PU benchmarking motivation; (3) Negoiță et al., *Improving Romanian LLM Pretraining Data Using Diversity and Quality Filtering*, LoResLM 2026 — cited to illustrate classifier-based filtering for under-resourced languages; (4) Nait Saada et al., *The Data-Quality Illusion: Rethinking Classifier-Based Quality Filtering for LLM Pretraining*, ICLR 2026 — cited in the discussion of classifier-based filters as a limitation; (5) Dai et al., *Positive-Unlabeled Learning with Extreme Scarcity of Labeled Positives*, ICML 2026 — cited in the discussion of extreme label scarcity and PU generalization bounds. |
+| It is necessary to analyze and clarify what substantive innovations this study has compared to previous work. Reflected in the form of a table. | Added an explicit novelty comparison Table 1 and contribution list in Introduction. |
+| It is necessary to clarify and supplement the basis for selecting PU learning methods. | Added a method-selection rationale and guidance table. |
+| Add a separate chapter to provide a comprehensive analysis of the limitations of this study. | Added a separate Limitations section. |
+| Add model training time and inference time data for various PU methods in the table. | Added aggregated runtime summaries; isolated inference timing is not available in the current outputs. |
+| The author needs to study and reveal which PU method should be selected under what data conditions to enhance the guiding value of the paper. | Added a method-selection guide in the supplement and strengthened the conclusion. |
+| **The reference citation format at the end of the article does not comply with MDPI standards and needs to be modified.** | **All references reformatted to MDPI ACS-style**: `Author, I.N. Title. *Journal* **Year**, *vol*, pp. DOI`. Conference proceedings follow MDPI's `In *Proceedings of...*; Publisher: Place, Year; pp. X–Y.` format. Software references use `Title; Version; Publisher: Place, Year.` format. |
 
 ### Reviewer 2
 
@@ -52,7 +53,7 @@ We revised the manuscript to address the reviewer comments using the current exp
 | Reimplementation alone is not a contribution | Clarified the methodological contribution and added a novelty comparison table. |
 | Introduction lacks scientific contributions | Added a dedicated contribution summary. |
 | Missing related-work section | Added a related-work subsection in the introduction. |
-| Need workflow diagram | Added a workflow table summarizing the end-to-end pipeline. |
+| Need workflow diagram | ??? |
 | Need justification for discarding MEDIUM | Added an explanation of why MEDIUM is excluded from the binary benchmark. |
 | Need analysis of extreme imbalance | Added dataset-level discussion and highlighted ISAP as a hard case. |
 | Need explanation of high plwiki runtime | Added runtime interpretation in the stability section. |
@@ -87,6 +88,7 @@ The following reviewer requests still require additional source data or a separa
 
 | Requested item | Status | Needed input |
 |---|---|---|
+| Supervised baseline comparison | Not added | Benchmark outputs for fully supervised models on the same 22-feature SpeakLeash setup (e.g., logistic/XGBoost), which were not available in the current workspace. |
 | Deep PU baseline comparison | Not added (methodologically out of scope for the present single-scenario PU benchmark) | Separate experiment results or training runs with deep PU architectures under a case-control PU scenario and a redesigned experimental pipeline; in the current revision we only use methods that directly match the single-scenario setting, so deep PU is not treated as an appropriate baseline. |
 | Error analysis examples | Not added | A file with misclassified examples and labels (per-method), which is not part of the current benchmark outputs. |
 | Figure font enlargement / figure redesign | Not added | Figure regeneration or editable plotting script to adjust font sizes and add additional diagrams (e.g., non-SCAR illustration, per-dataset F1 charts). |
