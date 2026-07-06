@@ -247,7 +247,7 @@ Interpretation & Aggregated results & Dataset-specific discussion, runtime analy
 % REV: Experimental design clarified; sample size and union-train explained and justified per Reviewer 2.
 \subsection{Experimental Design and Evaluation}
 
-Each method is evaluated across multiple random seeds ($10$ repetitions) and three target labeling rates ($c_{calc} \in \{0.2, 0.5, 0.8\}$). We use the union-train protocol. For each seed and each dataset, we first draw up to $10{,}000$ examples from the preprocessed table (if a dataset is smaller, all rows are kept), preserving the class composition induced by $Y$. Next, each sampled dataset is split into train and test parts using a stratified $70/30$ split. The training parts from all datasets are then concatenated into one shared PU training set, on which non-SCAR labeling is generated and all PU methods are fitted once. Evaluation is then performed separately for each dataset: predictions are sliced back to the corresponding test subset, and AUC, PR-AUC, and F1 are computed per dataset. The experimental pipeline was implemented using dedicated Python scripts. The current codes used in this study are publicly available in the paper repository.\footnote{\url{https://github.com/kapacc/pullm}}
+Each method is evaluated across multiple random seeds ($10$ repetitions) and three target labeling rates ($c_{calc} \in \{0.2, 0.5, 0.8\}$). We use the union-train protocol. For each seed and each dataset, we first draw up to $10{,}000$ examples from the preprocessed table (if a dataset is smaller, all rows are kept), preserving the class composition induced by $Y$. Next, each sampled dataset is split into train and test parts using a stratified $70/30$ split. The training parts from all datasets are then concatenated into one shared PU training set, on which non-SCAR labeling is generated and all PU methods are fitted once. Since the experiment was repeated 10 times, each with a different random 70/30 train--test split, the results are based on a multi-split evaluation rather than a single train--test split. Evaluation is then performed separately for each dataset: predictions are sliced back to the corresponding test subset, and AUC, PR-AUC, and F1 are computed per dataset. The experimental pipeline was implemented using dedicated Python scripts. The current codes used in this study are publicly available in the paper repository.\footnote{\url{https://github.com/kapacc/pullm}}
 
 The sample size of $10{,}000$ examples per corpus was chosen to balance computational tractability with statistical representativeness. While modern LLM data filters operate on corpora orders of magnitude larger, the present benchmark is designed to evaluate the methodological behaviour of PU classifiers under controlled conditions -- with fixed feature spaces, shared preprocessing, and repeated seeds -- rather than to simulate production-scale filtering. The $10{,}000$-example cap ensures that results remain comparable across corpora of very different sizes (from $\sim$6\,000 to $\sim$1.4M rows) while keeping wall-clock training time manageable across six methods, three labelling rates, and ten seeds. We discuss this choice as a limitation in Section~\ref{sec:limitations}.
 
@@ -457,28 +457,6 @@ In practical terms, the benchmark suggests the following guidance. Use \texttt{L
 % REV2: Five additional 2026 references added per reviewer request (PUICL, active PU, Bielik v3 tokenizer, Common Corpus, prior-shift PU).
 \begin{thebibliography}{99}
 
-\bibitem{speakleash}
-SpeakLeash~Team.
-SpeakLeash: Agnostic Dataset Library for the Polish Language.
-Version~0.3.51; PyPI: Warsaw, Poland, 2024.
-Available online: \url{https://pypi.org/project/speakleash/} (accessed on 3~July~2026).
-
-\bibitem{mdai25_mvc}
-Furma\'{n}czyk,~K.; Paczutkowski,~K.
-A Proposal for PU Classification under Non-SCAR Using Clustering and Logistic Model.
-In \textit{Proceedings of the 22nd International Conference on Modeling Decisions for Artificial Intelligence (MDAI~2025)};
-Torra,~V., Narukawa,~Y., Domingo-Ferrer,~J., Eds.;
-Springer: Valencia, Spain, 2025.
-\url{https://doi.org/10.48550/arXiv.2604.17130}
-
-\bibitem{pu_classic_propensity}
-Furma\'{n}czyk,~K.; Mielniczuk,~J.; Rejchel,~W.; Teisseyre,~P.
-Double Logistic Regression Approach to Biased Positive-Unlabeled Data.
-In \textit{ECAI~2023: 26th European Conference on Artificial Intelligence};
-Frontiers in Artificial Intelligence and Applications, Vol.~372;
-IOS Press: Amsterdam, The Netherlands, 2023; pp.~764--771.
-\url{https://doi.org/10.3233/FAIA230342}
-
 \bibitem{bekker2020survey}
 Bekker,~J.; Davis,~J.
 Learning from Positive and Unlabeled Data: A Survey.
@@ -491,93 +469,34 @@ Partially Supervised Classification of Text Documents.
 In \textit{Proceedings of the 19th International Conference on Machine Learning (ICML~2002)};
 Morgan Kaufmann: San Francisco, CA, USA, 2002; pp.~387--394.
 
-\bibitem{fusilier2015opinionspam}
-Fusilier,~D.H.; Montes-y-G\'{o}mez,~M.; Rosso,~P.; Cabrera,~R.G.
-Detecting Positive and Negative Deceptive Opinions Using PU-Learning.
-\textit{Inf. Process. Manag.} \textbf{2015}, \textit{51}, 433--443.
-\url{https://doi.org/10.1016/j.ipm.2014.11.001}
-
 \bibitem{nigam2000em}
 Nigam,~K.; McCallum,~A.K.; Thrun,~S.; Mitchell,~T.
 Text Classification from Labeled and Unlabeled Documents Using EM.
 \textit{Mach. Learn.} \textbf{2000}, \textit{39}, 103--134.
 \url{https://doi.org/10.1023/A:1007692713085}
 
-\bibitem{penedo2024fineweb}
-Penedo,~G.; Kydl\'{i}\v{c}ek,~H.; Ben~Allal,~L.; Lozhkov,~A.; Mitchell,~M.; Raffel,~C.; Von~Werra,~L.; Wolf,~T.
-The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale.
-In \textit{Proceedings of the 38th Conference on Neural Information Processing Systems (NeurIPS~2024), Track on Datasets and Benchmarks};
-Curran Associates: Red Hook, NY, USA, 2024.
-\url{https://arxiv.org/abs/2406.17557}
+\bibitem{fusilier2015opinionspam}
+Fusilier,~D.H.; Montes-y-G\'{o}mez,~M.; Rosso,~P.; Cabrera,~R.G.
+Detecting Positive and Negative Deceptive Opinions Using PU-Learning.
+\textit{Inf. Process. Manag.} \textbf{2015}, \textit{51}, 433--443.
+\url{https://doi.org/10.1016/j.ipm.2014.11.001}
 
-\bibitem{li2024scalingfilter}
-Li,~R.; Wei,~Y.; Zhang,~M.; Yu,~N.; Hu,~H.; Peng,~H.
-ScalingFilter: Assessing Data Quality Through the Lens of Scaling Laws.
-\textit{arXiv} \textbf{2024}, arXiv:2408.08310.
-\url{https://arxiv.org/abs/2408.08310}
-
-\bibitem{bielik7b}
-Ociepa,~K.; Flis,~{\L}.; Wr\'{o}bel,~K.; Gwo\'{z}d\'{z}iej,~A.; Kinas,~R.
-Bielik~7B~v0.1: A Polish Language Model---Development, Insights, and Evaluation.
-\textit{Comput. Sci.} \textbf{2025}, \textit{26}, 131--161.
-\url{https://doi.org/10.7494/csci.2025.26.4.7689}
-
-\bibitem{bielik11bv3}
-Ociepa,~K.; Flis,~{\L}.; Kinas,~R.; Wr\'{o}bel,~K.; Gwo\'{z}d\'{z}iej,~A.
-Bielik~11B~v3: Multilingual Large Language Model for European Languages.
-\textit{arXiv} \textbf{2025}, arXiv:2601.11579.
-\url{https://arxiv.org/abs/2601.11579}
-
-\bibitem{wawrzenczyk_puvae}
-Wawrze\'{n}czyk,~A.; Mielniczuk,~J.
-One-Class Classification Approach to Variational Learning from Biased Positive-Unlabeled Data.
+\bibitem{pu_classic_propensity}
+Furma\'{n}czyk,~K.; Mielniczuk,~J.; Rejchel,~W.; Teisseyre,~P.
+Double Logistic Regression Approach to Biased Positive-Unlabeled Data.
 In \textit{ECAI~2023: 26th European Conference on Artificial Intelligence};
 Frontiers in Artificial Intelligence and Applications, Vol.~372;
-IOS Press: Amsterdam, The Netherlands, 2023.
-\url{https://home.ipipan.waw.pl/j.mielniczuk/VAEPUCC.pdf}
+IOS Press: Amsterdam, The Netherlands, 2023; pp.~764--771.
+\url{https://doi.org/10.3233/FAIA230342}
 
-\bibitem{lassojoint}
-Furma\'{n}czyk,~K.; Paczutkowski,~K.; Dudzi\'{n}ski,~M.; Dziewa-Dawidczyk,~D.
-Classification Methods Based on Fitting Logistic Regression to Positive and Unlabeled Data.
-In \textit{Computational Science---ICCS~2022};
-Lecture Notes in Computer Science, Vol.~13350;
-Springer: Cham, Switzerland, 2022; pp.~33--46.
-\url{https://doi.org/10.1007/978-3-031-08751-6_3}
-
-\bibitem{hou_genpu}
-Hou,~M.; Chaib-draa,~B.; Li,~C.; Zhao,~Q.
-Generative Adversarial Positive-Unlabeled Learning.
-In \textit{Proceedings of the 27th International Joint Conference on Artificial Intelligence (IJCAI~2018)};
-IJCAI Organization: Stockholm, Sweden, 2018; pp.~2255--2261.
-\url{https://doi.org/10.24963/ijcai.2018/312}
-
-\bibitem{emami2026gneissweb}
-Emami~Gohari,~A.; Patel,~D.; Bhattacharjee,~B.; Belgodere,~B.; Braz,~F.A.; Chaudhary,~V.; Dalmia,~S.; Fadnis,~K.; Ganti,~R.; Ghosh,~P.; et~al.
-GneissWeb: Preparing High Quality Data for LLMs at Scale.
-In \textit{Proceedings of the 14th International Conference on Learning Representations (ICLR~2026)};
-OpenReview: Vienna, Austria, 2026.
-\url{https://openreview.net/forum?id=NRWUAo075J}
-
-\bibitem{wang2026pubenchmark}
-Wang,~J.; Garg,~S.; Schneider,~A.
-Accessible, Realistic, and Fair Evaluation of Positive-Unlabeled Learning Algorithms.
-In \textit{Proceedings of the 14th International Conference on Learning Representations (ICLR~2026)};
-OpenReview: Vienna, Austria, 2026.
-\url{https://openreview.net/forum?id=5R11h5o44C}
-
-\bibitem{negoita2026romanianllm}
-Negoi\'{t}a,~V.-A.; Masala,~M.; Rebedea,~T.
-Improving Romanian LLM Pretraining Data Using Diversity and Quality Filtering.
-In \textit{Proceedings of the Second Workshop on Language Models for Low-Resource Languages (LoResLM~2026)};
-Association for Computational Linguistics: Rabat, Morocco, 2026; pp.~140--148.
-\url{https://doi.org/10.18653/v1/2026.loreslm-1.13}
-
-\bibitem{saada2026cqf}
-Nait Saada,~T.; B\'{e}thune,~L.; Klein,~M.; Grangier,~D.; Cuturi,~M.; Ablin,~P.
-The Data-Quality Illusion: Rethinking Classifier-Based Quality Filtering for LLM Pretraining.
-In \textit{Proceedings of the 14th International Conference on Learning Representations (ICLR~2026)};
-OpenReview: Vienna, Austria, 2026.
-Available online: \url{https://openreview.net/forum?id=vSBACt34gS} (accessed on 3~July~2026).
+\bibitem{mdai25_mvc}
+Furma\'{n}czyk,~K.; Paczutkowski,~K.
+A Proposal for PU Classification under Non-SCAR Using Clustering and Logistic Model.
+In \textit{Proceedings of the 22nd International Conference on Modeling Decisions
+for Artificial Intelligence (MDAI~2025)};
+Torra,~V., Narukawa,~Y., Domingo-Ferrer,~J., Eds.;
+Springer: Valencia, Spain, 2025.
+\url{https://doi.org/10.48550/arXiv.2604.17130}
 
 \bibitem{dai2026scalepu}
 Dai,~Y.; Li,~X.; Wang,~W.; Li,~C.; Niu,~G.; Sugiyama,~M.
@@ -586,7 +505,11 @@ In \textit{Proceedings of the 43rd International Conference on Machine Learning 
 PMLR: 2026.
 Available online: \url{https://icml.cc/virtual/2026/poster/61529} (accessed on 3~July~2026).
 
-% --- NEW 2026 REFERENCES (added per reviewer request for >= 10 refs from 2026) ---
+\bibitem{mielniczuk2026priorshift}
+Mielniczuk,~J.; Rejchel,~W.; Teisseyre,~P.
+Prior Shift Estimation for Positive Unlabeled Data through the Lens of Kernel Embedding.
+\textit{arXiv} \textbf{2026}, arXiv:2502.21194v3.
+\url{https://doi.org/10.48550/arXiv.2502.21194}
 
 \bibitem{liu2026puicl}
 Liu,~S.; Chang,~Y.; Cheng,~M.; Tian,~Q.; Li,~P.
@@ -600,24 +523,116 @@ Active Learning from Positive and Unlabeled Examples.
 \textit{arXiv} \textbf{2026}, arXiv:2602.02081.
 \url{https://doi.org/10.48550/arXiv.2602.02081}
 
+\bibitem{bielik7b}
+Ociepa,~K.; Flis,~{\L}.; Wr\'{o}bel,~K.; Gwo\'{z}d\'{z}iej,~A.; Kinas,~R.
+Bielik~7B~v0.1: A Polish Language Model---Development, Insights, and Evaluation.
+\textit{Comput. Sci.} \textbf{2025}, \textit{26}, 131--161.
+\url{https://doi.org/10.7494/csci.2025.26.4.7689}
+
+\bibitem{bielik11bv3}
+Ociepa,~K.; Flis,~{\L}.; Kinas,~R.; Wr\'{o}bel,~K.; Gwo\'{z}d\'{z}iej,~A.
+Bielik~11B~v3: Multilingual Large Language Model for European Languages.
+\textit{arXiv} \textbf{2025}, arXiv:2601.11579.
+\url{https://arxiv.org/abs/2601.11579}
+
 \bibitem{ociepa2026bielikv3tok}
 Ociepa,~K.; Flis,~{\L}.; Kinas,~R.; Wr\'{o}bel,~K.; Gwo\'{z}d\'{z}iej,~A.
-Advancing Polish Language Modeling through Tokenizer Optimization in the Bielik~v3 7B and 11B Series.
+Advancing Polish Language Modeling through Tokenizer Optimization
+in the Bielik~v3 7B and 11B Series.
 \textit{arXiv} \textbf{2026}, arXiv:2604.10799.
 \url{https://doi.org/10.48550/arXiv.2604.10799}
 
+\bibitem{penedo2024fineweb}
+Penedo,~G.; Kydl\'{i}\v{c}ek,~H.; Ben~Allal,~L.; Lozhkov,~A.; Mitchell,~M.;
+Raffel,~C.; Von~Werra,~L.; Wolf,~T.
+The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale.
+In \textit{Proceedings of the 38th Conference on Neural Information Processing
+Systems (NeurIPS~2024), Track on Datasets and Benchmarks};
+Curran Associates: Red Hook, NY, USA, 2024.
+\url{https://arxiv.org/abs/2406.17557}
+
+\bibitem{emami2026gneissweb}
+Emami~Gohari,~A.; Patel,~D.; Bhattacharjee,~B.; Belgodere,~B.; Braz,~F.A.;
+Chaudhary,~V.; Dalmia,~S.; Fadnis,~K.; Ganti,~R.; Ghosh,~P.; et~al.
+GneissWeb: Preparing High Quality Data for LLMs at Scale.
+In \textit{Proceedings of the 14th International Conference on Learning
+Representations (ICLR~2026)};
+OpenReview: Vienna, Austria, 2026.
+\url{https://openreview.net/forum?id=NRWUAo075J}
+
+\bibitem{negoita2026romanianllm}
+Negoi\'{t}a,~V.-A.; Masala,~M.; Rebedea,~T.
+Improving Romanian LLM Pretraining Data Using Diversity and Quality Filtering.
+In \textit{Proceedings of the Second Workshop on Language Models for
+Low-Resource Languages (LoResLM~2026)};
+Association for Computational Linguistics: Rabat, Morocco, 2026; pp.~140--148.
+\url{https://doi.org/10.18653/v1/2026.loreslm-1.13}
+
+\bibitem{li2024scalingfilter}
+Li,~R.; Wei,~Y.; Zhang,~M.; Yu,~N.; Hu,~H.; Peng,~H.
+ScalingFilter: Assessing Data Quality Through the Lens of Scaling Laws.
+\textit{arXiv} \textbf{2024}, arXiv:2408.08310.
+\url{https://arxiv.org/abs/2408.08310}
+
+\bibitem{saada2026cqf}
+Nait Saada,~T.; B\'{e}thune,~L.; Klein,~M.; Grangier,~D.; Cuturi,~M.; Ablin,~P.
+The Data-Quality Illusion: Rethinking Classifier-Based Quality Filtering
+for LLM Pretraining.
+In \textit{Proceedings of the 14th International Conference on Learning
+Representations (ICLR~2026)};
+OpenReview: Vienna, Austria, 2026.
+\url{https://openreview.net/forum?id=vSBACt34gS}
+
 \bibitem{langlais2026commoncorpus}
-Langlais,~P.-C.; Chizhov,~P.; Arnett,~C.; Hinostroza,~C.; Nee,~M.; Jones,~E.; Girard,~I.; Mach,~D.; Stasenko,~A.; Yamshchikov,~I.
+Langlais,~P.-C.; Chizhov,~P.; Arnett,~C.; Hinostroza,~C.; Nee,~M.;
+Jones,~E.; Girard,~I.; Mach,~D.; Stasenko,~A.; Yamshchikov,~I.
 Common Corpus: The Largest Collection of Ethical Data for LLM Pre-Training.
-In \textit{Proceedings of the 14th International Conference on Learning Representations (ICLR~2026)};
+In \textit{Proceedings of the 14th International Conference on Learning
+Representations (ICLR~2026)};
 OpenReview: Vienna, Austria, 2026.
 \url{https://openreview.net/forum?id=XeAvoKDOn0}
 
-\bibitem{mielniczuk2026priorshift}
-Mielniczuk,~J.; Rejchel,~W.; Teisseyre,~P.
-Prior Shift Estimation for Positive Unlabeled Data through the Lens of Kernel Embedding.
-\textit{arXiv} \textbf{2026}, arXiv:2502.21194v3.
-\url{https://doi.org/10.48550/arXiv.2502.21194}
+\bibitem{wang2026pubenchmark}
+Wang,~J.; Garg,~S.; Schneider,~A.
+Accessible, Realistic, and Fair Evaluation of Positive-Unlabeled
+Learning Algorithms.
+In \textit{Proceedings of the 14th International Conference on Learning
+Representations (ICLR~2026)};
+OpenReview: Vienna, Austria, 2026.
+\url{https://openreview.net/forum?id=5R11h5o44C}
+
+\bibitem{lassojoint}
+Furma\'{n}czyk,~K.; Paczutkowski,~K.; Dudzi\'{n}ski,~M.; Dziewa-Dawidczyk,~D.
+Classification Methods Based on Fitting Logistic Regression to Positive
+and Unlabeled Data.
+In \textit{Computational Science---ICCS~2022};
+Lecture Notes in Computer Science, Vol.~13350;
+Springer: Cham, Switzerland, 2022; pp.~33--46.
+\url{https://doi.org/10.1007/978-3-031-08751-6_3}
+
+\bibitem{hou_genpu}
+Hou,~M.; Chaib-draa,~B.; Li,~C.; Zhao,~Q.
+Generative Adversarial Positive-Unlabeled Learning.
+In \textit{Proceedings of the 27th International Joint Conference on
+Artificial Intelligence (IJCAI~2018)};
+IJCAI Organization: Stockholm, Sweden, 2018; pp.~2255--2261.
+\url{https://doi.org/10.24963/ijcai.2018/312}
+
+\bibitem{wawrzenczyk_puvae}
+Wawrze\'{n}czyk,~A.; Mielniczuk,~J.
+One-Class Classification Approach to Variational Learning from Biased
+Positive-Unlabeled Data.
+In \textit{ECAI~2023: 26th European Conference on Artificial Intelligence};
+Frontiers in Artificial Intelligence and Applications, Vol.~372;
+IOS Press: Amsterdam, The Netherlands, 2023.
+\url{https://home.ipipan.waw.pl/j.mielniczuk/VAEPUCC.pdf}
+
+\bibitem{speakleash}
+SpeakLeash~Team.
+SpeakLeash: Agnostic Dataset Library for the Polish Language.
+Version~0.3.51; PyPI: Warsaw, Poland, 2024.
+Available online: \url{https://pypi.org/project/speakleash/}
+(accessed on 3~July~2026).
 
 \end{thebibliography}
 \end{document}
