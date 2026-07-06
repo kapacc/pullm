@@ -7,6 +7,8 @@
 \usepackage{booktabs}
 \usepackage{booktabs}
 \usepackage{amssymb}   % dla \checkmark
+\usepackage{fontawesome5}
+\usetikzlibrary{positioning}
 \IfFileExists{supplement.aux}{\externaldocument{supplement}}{}
 
 \setlength{\headheight}{20pt}
@@ -50,7 +52,7 @@
 
 Positive-unlabeled learning is a natural fit for text quality assessment when only a subset of high-quality examples is explicitly identified and the remaining documents are partially observed. This scenario arises naturally whenever collecting negative labels is costly or semantically ambiguous -- a situation that directly characterizes large-scale text corpora such as those studied here~\cite{bekker2020survey}.
 
-The theoretical foundations of PU learning have been well-established. Bekker and Davis~\cite{bekker2020survey} provide a comprehensive survey covering label-frequency estimation, class-prior estimation, and algorithm design under partial supervision. Liu et al.~\cite{liu2002spy} formalized this structure for text classification and introduced the Spy technique, in which a fraction of labeled positives is temporarily moved into the unlabeled set to calibrate a threshold for reliable negative extraction. Nigam et al.~\cite{nigam2000em} showed that even a small labeled set combined with unlabeled documents via Expectation-Maximization substantially reduces classification error -- an early demonstration that the unlabeled majority carries exploitable signal. The PU framework has since been applied across diverse domains: Fusilier et al.~\cite{fusilier2015opinionspam} showed that a PU classifier trained only on confirmed fake hotel reviews achieves F-measure on par with fully supervised baselines, and Furma\'{n}czyk et al.~\cite{pu_classic_propensity,mdai25_mvc} developed propensity-based and cluster-assisted logistic methods that form the direct methodological basis of the present work. Recent work has extended PU learning to extreme label-scarcity regimes: Dai et al.~\cite{dai2026scalepu} derive sufficient learning thresholds and propose the ScalePU framework, which explicitly targets settings with very few labeled positives. A complementary theoretical advance concerns class-prior estimation when the target distribution may differ from the source: Mielniczuk et al.~\cite{mielniczuk2026priorshift} introduce a kernel-embedding estimator for PU data that directly handles prior shift, establishing non-asymptotic bounds relevant to our multi-domain setting. The in-context learning paradigm has recently been extended to PU classification: Liu et al.~\cite{liu2026puicl} introduce PUICL, a pretrained transformer that solves PU tasks in a single forward pass without per-dataset fine-tuning, opening new possibilities for rapid evaluation across heterogeneous corpora. Mansouri et al.~\cite{mansouri2026activepu} provide the first theoretical analysis of the label complexity of active PU learning, studying how an adaptive querying strategy can reduce the number of labels needed to recover a reliable classifier.
+The theoretical foundations of PU learning have been well-established. Bekker and Davis~\cite{bekker2020survey} provide a comprehensive survey covering label-frequency estimation, class-prior estimation, and algorithm design under partial supervision. Liu et al.~\cite{liu2002spy} formalized this structure for text classification and introduced the Spy technique, in which a fraction of labeled positives is temporarily moved into the unlabeled set to calibrate a threshold for reliable negative extraction. Nigam et al.~\cite{nigam2000em} showed that even a small labeled set combined with unlabeled documents via Expectation-Maximization substantially reduces classification error -- an early demonstration that the unlabeled majority carries exploitable signal. The PU framework has since been applied across diverse domains: Fusilier et al.~\cite{fusilier2015opinionspam} showed that a PU classifier trained solely on confirmed fake hotel reviews achieves F-measure on par with fully supervised baselines, and Furma\'{n}czyk et al.~\cite{pu_classic_propensity,mdai25_mvc} developed propensity-based and cluster-assisted logistic methods that form the direct methodological basis of the present work. Recent work has extended PU learning to settings with extremely few labeled positive examples. Dai et al.~\cite{dai2026scalepu} derived theoretical conditions under which reliable learning remains possible and proposed the ScalePU framework for such highly label-scarce scenarios. A complementary line of research concerns class-prior estimation under distribution shift. Mielniczuk et al.~\cite{mielniczuk2026priorshift} proposed a kernel-embedding estimator for PU data that explicitly accounts for prior shift and established non-asymptotic theoretical guarantees for the estimator. More recently, Liu et al.~\cite{liu2026puicl} , an in-context learning framework based on pretrained transformers that performs PU classification without task-specific fine-tuning. These recent developments demonstrate the rapid expansion of PU learning toward both stronger theoretical guarantees and modern foundation-model architectures. However, they have not yet been systematically evaluated for stylometric quality assessment of Polish LLM training corpora. Mansouri et al.~\cite{mansouri2026activepu} provide the first theoretical analysis of the label complexity of active PU learning, studying how an adaptive querying strategy can reduce the number of labels needed to recover a reliable classifier.
 
 A critical practical consideration is that the labeling mechanism in quality-annotation pipelines is unlikely to satisfy the \emph{Selected Completely At Random} (SCAR) assumption. Formally, SCAR requires $e(\mathbf{x}) := P(S=1 \mid Y=1, \mathbf{x}) = c$ for some constant $c$ independent of $\mathbf{x}$ -- that is, every positive instance is equally likely to be labeled regardless of its features. In practice, however, annotators preferentially label visually prominent documents -- those with higher lexical density or greater length -- making the labeling probability feature-dependent and thus violating the SCAR assumption~\cite{bekker2020survey}. This non-SCAR regime motivates the use of propensity-based labeling schemes that explicitly model $e(\mathbf{x})$~\cite{pu_classic_propensity}.
 From this perspective, document-quality annotation for LLM training texts can be viewed as a PU learning problem under a non-SCAR labeling mechanism: only a subset of truly high-quality documents receives an explicit positive label, while the remaining pool is left unlabeled and therefore contains a mixture of high- and low-quality texts. The probability that a high-quality document is annotated as such then depends on its observable attributes $\mathbf{x}$ (for example length, lexical density, or domain), which matches the instance-dependent propensity setting $e(\mathbf{x}) = P(S=1 \mid Y=1, \mathbf{x})$ emphasized in recent PU learning work~\cite{bekker2020survey}.
@@ -95,7 +97,7 @@ Reporting & Earlier benchmark summary & Expanded tables, stability analysis, run
 \end{table}
 
 \begin{table}[H]
-\caption{Comparison of previous studies with the present work.}
+\caption{Comparison of selected related work and the present study.}
 \label{tab:novelty}
 \centering
 \begin{tabular}{lllll}
@@ -114,11 +116,11 @@ Ociepa et al.   & Polish LLM          & $\times$     & $\times$ & $\checkmark$ \
 \end{tabular}
 \end{table}
 
-Throughout this work we adopt the \emph{single-scenario} formulation of PU learning~\cite{bekker2020survey}, in which the learner observes an i.i.d.\ sample of pairs $(X, S)$, where $S=1$ implies $Y=1$, while observations with $S=0$ are unlabeled and arise from a mixture of positive and negative instances. This stands in contrast to the \emph{case-control} scenario, where separate i.i.d.\ samples from $p(\mathbf{x}\mid Y=1)$ and from the marginal $p(\mathbf{x})$ are available. The single-scenario setting is the natural one for our use case: the SpeakLeash corpora arrive as a single collection in which only a fraction of high-quality documents carries an explicit \texttt{HIGH} label, while the remaining documents are left unlabelled regardless of their true quality.
+Throughout this work, we adopt the \emph{single-scenario} formulation of PU learning~\cite{bekker2020survey}Specifically, we assume that the latent triples $(X_i,Y_i,S_i)$, $i=1,\ldots,n$, are i.i.d.\ realizations of the random vector $(X,Y,S)$. However, only the pairs $(X_i,S_i)$ are observed, where $S_i=1$ implies $Y_i=1$, while observations with $S_i=0$ are unlabeled and originate from a mixture of positive and negative instances. This stands in contrast to the \emph{case-control} scenario, where separate i.i.d.\ samples from $p(\mathbf{x}\mid Y=1)$ and from the marginal $p(\mathbf{x})$ are available. The single-scenario setting is the natural one for our use case: the SpeakLeash corpora arrive as a single collection in which only a fraction of high-quality documents carries an explicit \texttt{HIGH} label, while the remaining documents are left unlabelled regardless of their true quality.
 
 \section{Objectives and Methods}
 
-The primary objective of this work is to evaluate six PU learning methods on Polish text quality classification tasks using the SpeakLeash corpora. We implemented a comprehensive benchmarking pipeline that controls for both the labelling mechanism and the estimation of the class-prior proxy $c$, enabling direct comparison of PU methods under non-SCAR settings.
+The primary objective of this work is to investigate whether positive--unlabeled (PU) learning methods can be effectively applied to text quality classification of Polish LLM training corpora. To achieve this objective, we evaluate six representative PU learning methods using the SpeakLeash corpora. We implemented a comprehensive benchmarking pipeline that controls for both the labelling mechanism and the estimation of the class-prior proxy $c$, enabling direct comparison of PU methods under non-SCAR settings.
 
 \begin{table}[H]
 \caption{Characteristics of the PU learning methods considered in the benchmark.}
@@ -129,8 +131,8 @@ The primary objective of this work is to evaluate six PU learning methods on Pol
 \textbf{Method} & \textbf{Type} & \textbf{Handles non-SCAR} & \textbf{Computational Cost} \\
 \midrule
 Naive      & Baseline PU           & No      & Low    \\
-Clust      & Cluster-based PU      & Partial & Medium \\
-LassoJoint & Propensity-aware PU   & Yes     & Medium \\
+Clust      & Cluster-based PU      & Yes & Medium \\
+LassoJoint & Propensity-aware PU   & Partial     & Medium \\
 Spy        & Reliable-negative PU  & Partial & Medium \\
 \bottomrule
 \end{tabular}
@@ -183,6 +185,65 @@ Interpretation & Aggregated results & Dataset-specific discussion, runtime analy
 \end{tabularx}
 \end{table}
 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  node distance=7mm and 15mm,
+  box/.style={
+    draw, rounded corners,
+    minimum width=5cm, minimum height=8mm,
+    align=center, fill=white
+  },
+  innerbox/.style={
+    draw, rounded corners,
+    minimum width=4.2cm, minimum height=8mm,
+    align=center, fill=gray!8
+  },
+  arrow/.style={->,>=latex,thick},
+  looparrow/.style={->,>=latex,thick,dashed,gray}
+]
+
+%% --- główne kroki ---
+\node[box] (data) {SpeakLeash Dataset};
+\node[box, below=of data] (feat) {Feature Selection};
+\node[box, below=of feat] (conv) {HIGH/LOW Conversion};
+
+%% --- ramka pętli ---
+\node[draw, rounded corners=6pt, dashed, thick,
+      below=14mm of conv,
+      minimum width=5.4cm, minimum height=5.2cm,
+      label={[font=\small\bfseries, anchor=north west,
+              inner sep=4pt]north west:\faRedo\;Repeat $\times 10$}
+     ] (loopbox) {};
+
+%% --- kroki wewnątrz pętli ---
+\node[innerbox, below=20mm of conv] (split)  {Train--Test Split (70/30)};
+\node[innerbox, below=of split]     (label)  {PU Label Generation};
+\node[innerbox, below=of label]     (method) {PU Learning Method};
+\node[innerbox, below=of method]    (eval)   {Evaluation};
+
+%% --- strzałka powrotna po prawej ---
+\draw[looparrow]
+  (eval.east) -- ++(1.2,0)
+  node[midway] {}
+  |- node[right, pos=0.25, font=\scriptsize\itshape] {next seed}
+  (split.east);
+
+%% --- krok końcowy ---
+\node[box, below=14mm of loopbox] (agg)
+      {Aggregate Results\\(Mean $\pm$ SD)};
+
+%% --- strzałki główne ---
+\draw[arrow](data)--(feat);
+\draw[arrow](feat)--(conv);
+\draw[arrow](conv)--(split);
+\draw[arrow](eval)  -- (agg);
+
+\end{tikzpicture}
+\caption{Benchmark pipeline for a single dataset and labelling strategy.}
+\label{fig:pipeline}
+\end{figure}
+
 % REV: Experimental design clarified; sample size and union-train explained and justified per Reviewer 2.
 \subsection{Experimental Design and Evaluation}
 
@@ -194,6 +255,36 @@ The sample size of $10{,}000$ examples per corpus was chosen to balance computat
 \subsection{Background: The Bielik Quality Classification Use Case}
 
 The original motivation for PU learning in Polish NLP stems from the Bielik model family. The Bielik 7B v0.1 model was adapted from Mistral 7B v0.1 due to limited access to high-quality Polish data. During pre-training preparation, 9,000 documents were manually annotated with quality labels (HIGH, MEDIUM, LOW), and 266 stylometric features were computed per document (verb/noun frequencies, sentence counts, punctuation patterns). An XGBoost classifier was then used to classify the full corpus, retaining only documents predicted to be high quality for final LLM training. This historical approach motivates the PU framework: only a seed set of confirmed high-quality documents is available, while the remaining pool remains partially observed, making dedicated PU methods essential for scalable and principled quality assessment. The subsequent Bielik~v3 series~\cite{ociepa2026bielikv3tok} extended this approach by replacing the universal Mistral-based tokenizer with a Polish-optimized vocabulary, further illustrating how data-quality decisions interact with architectural choices in the development of language-specific LLMs.
+
+\begin{table}[t]
+\centering
+\caption{Comparison of labelling strategies used in the benchmark.}
+\label{tab:labelling_strategies}
+\small
+\begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Property} & \textbf{Classic (non-SCAR)} & \textbf{MVC (non-SCAR)} \\
+\midrule
+Type & non-SCAR & non-SCAR \\
+\addlinespace
+Mechanism & Logistic propensity $e(x) = \sigma(\alpha + \theta^\top x)$; $S \sim \mathrm{Bernoulli}(e(x))$ for $Y=1$ only & Rank-based scoring using sum of top-variance features; $S=1$ for $Y=1$ below rank threshold \\
+\addlinespace
+Dependence of $S$ on $X$ & Yes -- linear in features (via $\theta^\top x$) & Yes -- nonlinear, rank-based \\
+\addlinespace
+Calibration of \texttt{c\_calc} & Grid search over $\alpha \in [-10, 10]$ minimising $\bigl|\mathbb{E}[e(x) \mid Y=1] - c\bigr|$ & Linear interpolation over quantile levels $\{0.1, 0.3, 0.5, 0.7, 0.9\}$ \\
+\addlinespace
+Used in benchmark & \texttt{labelling\_strategy=classic} & \texttt{labelling\_strategy=mvc} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Both labelling strategies respect the class structure ($Y \in \{0, 1\}$) but differ fundamentally in how they model the selection propensity $e(\mathbf{x}) = P(S=1 \mid Y=1, \mathbf{x})$ and calibrate the achieved class-prior proxy $c = \mathbb{E}[S \mid Y=1]$ to match a target value $c_{calc}$.
+
+The \textbf{Classic (logistic) strategy} assumes a linear propensity model $e(\mathbf{x}) = \sigma(\alpha + \boldsymbol{\theta}^\top \mathbf{x})$, where the propensity score uses all available variables and $\alpha$ is calibrated via grid search over $[-10, 10]$ to minimize $|c_{calc} - c|$. This approach is stochastic: each run generates labels independently via Bernoulli sampling, leading to non-zero variance across random seeds. It follows established PU simulation practice~\cite{pu_classic_propensity}. In the Classic strategy we use a homogeneous coefficient vector $\boldsymbol{\theta} = (1, \dots, 1)^\top \in \mathbb{R}^p$ (i.e. $\theta_j = 1$ for all $j$), so that the linear predictor reduces to $\alpha + \sum_{j=1}^p x_j$. The intercept $\alpha$ is selected on a uniform grid of $401$ points spanning $[-10, 10]$ to minimise $\bigl|\mathbb{E}[e(\mathbf{X})\mid Y=1] - c_{\mathrm{calc}}\bigr|$, where the expectation is approximated by the sample mean over positive instances in the training set. Once the optimal $\hat{\alpha}$ is found, selection labels are drawn as $S_i \sim \mathrm{Bernoulli}(e(\mathbf{x}_i))$ independently for each $Y_i = 1$, while $S_i = 0$ is set deterministically for all $Y_i = 0$.
+
+The \textbf{MVC (Most Variable Columns) strategy} is a deterministic, rank-based mechanism based on feature variance ranking. In this work samples are scored by summing only the two features with the highest variance and then ranked. A linear threshold is computed by interpolation at quantile levels $\{0.1, 0.3, 0.5, 0.7, 0.9\}$ to match the target $c_{calc}$. This method was introduced in~\cite{mdai25_mvc}.
+
+
 
 % REV: Dataset table extended with Text type column per Reviewer 2.
 \section{Datasets}
