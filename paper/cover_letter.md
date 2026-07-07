@@ -69,6 +69,8 @@ We revised the manuscript to address the reviewer comments using the current exp
 
 Suggestions for Improvement
 
+| Comment | Response |
+|---|---|
 |It would be useful to include a diagram illustrating the concept of non-SCAR labeling in the context of text quality. A visual explanation of why longer or “more complex” texts are more likely to receive labels from annotators would help to better understand the motivation for using PU methods. | XXX|
 |It is suggested to include a section with a computational complexity analysis (Big O notation) for each of the six methods. This is important for LLM developers who have to process terabytes of data and need to know whether the chosen algorithm is fast enough. | XXX|
 |Add a column to Table 2 with information about the type of text in each dataset (e.g. “formal”, “informal”, “technical”). This will help to better interpret the differences in classification results between different SpeakLeash domains. | XXX|
