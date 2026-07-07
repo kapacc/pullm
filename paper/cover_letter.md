@@ -12,22 +12,22 @@ We revised the manuscript to address the reviewer comments using the current exp
 
 | Area | What changed | File |
 |---|---|---|
-| Quantitative abstract | Added best F1 values and gains over the Naive baseline | `paper/main_mdai.tex` |
-| Novelty clarification | Added  Tables 1-2  comparing the earlier non-SCAR study and the present manuscript | `paper/main_mdai.tex` |
-| Contribution clarification | Added an explicit five-point contribution list at the end of the Introduction, highlighting the first comprehensive PU-learning benchmark for Polish LLM training corpora, two non-SCAR labeling mechanisms, six SpeakLeash domains, deployment recommendations, and the open-source Python implementation | `paper/main_mdai.tex` |
-| Workflow clarity | Added an end-to-end benchmark workflow table - Table 4| `paper/main_mdai.tex` |
-| Dataset interpretation | Added a `Text type` column to the dataset summary table - Table 5 | `paper/main_mdai.tex` |
-| Non-SCAR interpretation | Expanded the stability section with practical runtime/calibration interpretation | `paper/main_mdai.tex` |
-| Discussion and limitations | Added separate Discussion and Limitations sections | `paper/main_mdai.tex` |
-| Method guidance | Added a practical method-selection guide derived from benchmark results | `paper/supplement_mdai.tex` |
-| Benchmark summary | Added best-F1 and runtime summary tables to the supplement | `paper/supplement_mdai.tex` |
-| 2026 references | Added multiple peer-reviewed 2026 references (GneissWeb, PU benchmark evaluation, Romanian LLM data filtering, CQF data-quality illusion, ScalePU) | `paper/main_mdai.tex` |
-| **Bibliography format** | **Reformatted all references to MDPI ACS-style** (Author, I.N.; Title; *Journal* **Year**, *vol*, pp; DOI) | `paper/main_mdai.tex` |
-| **Keywords** | **Replaced `Bielik.AI` with `data cleaning`** — Bielik.AI is a project name, not a scientific term | `paper/main_mdai.tex` |
-| Sample size justification | Added explicit explanation of the 10,000-example cap in the Experimental Design section | `paper/main_mdai.tex` |
-| Classic θ justification | Added sentence explaining why θ=(1,…,1) is used in the Classic strategy (uniform aggregate propensity) | `paper/main_mdai.tex` |
-| MVC 2-feature justification | Added sentence explaining why exactly two features are used in MVC scoring | `paper/main_mdai.tex` |
-| Seed sequence justification | Added sentence explaining the choice of seeds {11,22,33,44,55} as an evenly-spaced arithmetic progression | `paper/main_mdai.tex` |
+| Quantitative abstract | Added best F1 values and gains over the Naive baseline | `paper/main_mdpi.tex` |
+| Novelty clarification | Added  Tables 1-2  comparing the earlier non-SCAR study and the present manuscript | `paper/main_mdpi.tex` |
+| Contribution clarification | Added an explicit five-point contribution list at the end of the Introduction, highlighting the first comprehensive PU-learning benchmark for Polish LLM training corpora, two non-SCAR labeling mechanisms, six SpeakLeash domains, deployment recommendations, and the open-source Python implementation | `paper/main_mdpi.tex` |
+| Workflow clarity | Added an end-to-end benchmark workflow table - Table 4| `paper/main_mdpi.tex` |
+| Dataset interpretation | Added a `Text type` column to the dataset summary table - Table 5 | `paper/main_mdpi.tex` |
+| Non-SCAR interpretation | Expanded the stability section with practical runtime/calibration interpretation | `paper/main_mdpi.tex` |
+| Discussion and limitations | Added separate Discussion and Limitations sections | `paper/main_mdpi.tex` |
+| Method guidance | Added a practical method-selection guide derived from benchmark results | `paper/supplement_mdpi.tex` |
+| Benchmark summary | Added best-F1 and runtime summary tables to the supplement | `paper/supplement_mdpi.tex` |
+| 2026 references | Added multiple peer-reviewed 2026 references (GneissWeb, PU benchmark evaluation, Romanian LLM data filtering, CQF data-quality illusion, ScalePU) | `paper/main_mdpi.tex` |
+| **Bibliography format** | **Reformatted all references to MDPI ACS-style** (Author, I.N.; Title; *Journal* **Year**, *vol*, pp; DOI) | `paper/main_mdpi.tex` |
+| **Keywords** | **Replaced `Bielik.AI` with `data cleaning`** — Bielik.AI is a project name, not a scientific term | `paper/main_mdpi.tex` |
+| Sample size justification | Added explicit explanation of the 10,000-example cap in the Experimental Design section | `paper/main_mdpi.tex` |
+| Classic θ justification | Added sentence explaining why θ=(1,…,1) is used in the Classic strategy (uniform aggregate propensity) | `paper/main_mdpi.tex` |
+| MVC 2-feature justification | Added sentence explaining why exactly two features are used in MVC scoring | `paper/main_mdpi.tex` |
+| Seed sequence justification | Added sentence explaining the choice of seeds {11,22,33,44,55} as an evenly-spaced arithmetic progression | `paper/main_mdpi.tex` |
 
 ## Reviewer-Oriented Responses
 
@@ -96,7 +96,7 @@ Suggestions for Improvement
 | The paper only considers limited Random Seed Range. Stability analysis uses only five seeds (11, 22, 33, 44, 55) - a non-random, arbitrary sequence. Why not use standard random seeds or a larger sample? The limited range reduces confidence in stability claims? | Stated as a limitation of the current benchmark design. |
 |Single Train-Test Split per Seed. The 70/30 split is performed once per seed with a fixed random seed. Without cross-validation or multiple splits, results may be sensitive to the specific train/test partition. The paper has missing Baseline Comparisons. There are no comparisons to (1) Fully supervised methods on the same 22 features (2) Alternative PU methods from the literature beyond the six tested (3) Simple heuristics (e.g., threshold-based filtering using individual features)|Since the experiment was repeated 10 times, each with a different random 70/30 train--test split, the results are based on a multi-split evaluation rather than a single train--test split.**The Naive method is the fully supervised baseline.** It applies standard logistic regression to the observed PU label S without any PU-specific correction — it is the simplest possible supervised classifier on the same 22 features, same split, and same evaluation protocol. The difference between Naive and each PU method therefore directly measures the contribution of the semi-supervised correction. Additional PU methods from the literature and simple heuristics (e.g., threshold-based feature filtering) are acknowledged as directions for future work.|
 |The paper correctly identifies that real-world labeling is non-SCAR but doesn't fully address: (1) How to verify the labeling mechanism in practice (2) The impact of propensity misspecification on classification performance (3) Whether the proposed methods are robust to different forms of non-SCAR. The class-prior proxy   is estimated during labeling, but: (1) No method is provided to verify this estimate on held-out data (2) The impact of estimation error on downstream classification is not analyzed (3) For MVC, achieving   values deviating from target (e.g., 0.088 vs 0.2 on plwiki, Table 3) suggests significant miscalibration|XXX|
-|Authors could consider adding data chart to illustrate results of the proposed method in section 6. The original contributions of the paper are not very clear, and the authors could explain more about the merits of the proposed method in section 6. Authors could expand the conclusion section 6 to describe more about the original contributions of the paper.|Moze dodac albo napisac, ze mmay to w tabelach 1-2?|
+|Authors could consider adding data chart to illustrate results of the proposed method in section 6. The original contributions of the paper are not very clear, and the authors could explain more about the merits of the proposed method in section 6. Authors could expand the conclusion section 6 to describe more about the original contributions of the paper.|The novelty and contributions are already summarized in Tables 1–2 of the manuscript|
 Additionaly:
 | Non-SCAR misspecification and calibration concerns | Added discussion of calibration behavior and strategy sensitivity; added justification for homogeneous θ=(1,…,1) in Classic strategy and explained the MVC deviations in terms of rank-based scoring using only the two most variable features. |
 | **Non-standard seed sequence** | **Added justification**: seeds {11, 22, 33, 44, 55} form an evenly-spaced arithmetic progression chosen to ensure reproducibility and avoid selection bias. |
