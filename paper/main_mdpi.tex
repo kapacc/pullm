@@ -345,7 +345,7 @@ Dataset & Text type & Raw rows & \shortstack{Preprocessed\\rows} & Neg Inst & Po
 % REV: Narrative around Figure 1 expanded; figure kept but interpretation clarified.
 Figure~\ref{fig:common_variables_condensed} presents a condensed comparison of shared feature distributions for all six preprocessed SpeakLeash corpora used in this benchmark (\texttt{plwiki}, \texttt{open\_subtitles\_corpus}, \texttt{job\_offers\_pl\_corpus}, \texttt{ISAP\_corpus}, \texttt{ulotki\_medyczne}, \texttt{wolne\_lektury\_corpus}). The left panel shows per-feature medians, while the right panel shows interquartile ranges (IQR). Two patterns are visible: first, central tendencies differ most strongly for ratio-style features such as lexical density, noun ratio, and verb ratio; second, several count-like features have very low IQR after min-max scaling, indicating narrow within-dataset spread despite clear between-dataset differences.
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
 \centering
 \includegraphics[width=\textwidth]{../outputs/common_variables_condensed_distributions.png}
 \caption{Condensed comparison of shared feature distributions for all six preprocessed SpeakLeash corpora used in this benchmark. Left: feature medians. Right: IQR ($Q_{0.75}-Q_{0.25}$).}
