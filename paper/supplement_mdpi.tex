@@ -28,7 +28,7 @@ Table~\ref{tab:benchmark_overview_best} summarizes the best observed F1 score fo
 Table~\ref{tab:prior_work_comparison} clarifies how the current manuscript extends the earlier non-SCAR study.
 
 \begin{table}[H]
-\caption{Comparison of the earlier non-SCAR study and the present manuscript.}
+\caption{Comparison of the our  earlier non-SCAR study and the present manuscript.}
 \label{tab:prior_work_comparison}
 \centering
 \small
@@ -105,8 +105,6 @@ Need to stress-test label-generation assumptions & Compare \texttt{classic} vs \
 \bottomrule
 \end{tabularx}
 \end{table}
-
-Across the full benchmark, a paired Wilcoxon test on matched classic-versus-MVC runs yields a non-significant global difference ($p=0.126$), so any strategy advantage should be interpreted at the dataset level rather than as a universal effect.
 
 \section{Labelling Strategy: \texttt{mvc}}
 
@@ -427,6 +425,9 @@ Table~\ref{tab:feature_descriptions} provides a comprehensive list of all 22 lin
 \end{tabular}
 \end{table}
 
+
+
+\section{Statistical Comparison for F1, AUC, AUCPR for different PU methods with classic and MVC scenarios}
 \begin{table}[H] 
 
 \caption{Results of the paired Wilcoxon signed-rank tests comparing the classic and non-SCAR variants based on the F1 score. For each threshold parameter $c$, Holm's correction was applied across the six tested methods. Statistically significant adjusted $p$-values ($\alpha=0.05$) are shown in bold.} 
@@ -526,8 +527,6 @@ Strict LassClust
 \end{table} 
 
  
-
-\section{AUCPR}
 
 \begin{table}[H] 
 
