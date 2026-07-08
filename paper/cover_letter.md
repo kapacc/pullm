@@ -1,4 +1,4 @@
-# Cover Letter Draft
+# Cover Letter
 
 ## Manuscript
 `PU-Based Quality Classifier for LLM Training Texts`
