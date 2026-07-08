@@ -232,6 +232,14 @@ The pre-computed results are in:
 - `outputs/benchmark_summary.csv` — Aggregated statistics
 - `paper/supplement.pdf` — Full results tables
 
+To rebuild the LaTeX manuscripts, run the commands from the `paper/` directory so the relative paths to `Definitions/` and `../outputs/` resolve correctly:
+
+```bash
+cd paper
+latexmk -pdf -interaction=nonstopmode -halt-on-error main_mdpi.tex
+latexmk -pdf -interaction=nonstopmode -halt-on-error supplement_mdpi.tex
+```
+
 To regenerate all results from scratch:
 
 ```bash
@@ -255,7 +263,8 @@ This work is part of research on quality classification for LLM training texts u
 
 **Related files:**
 - [repo_description_en.md](repo_description_en.md) — Detailed technical workflow documentation
-- [paper/main.tex](paper/main.tex) — Full manuscript LaTeX source
+- [paper/main_mdpi.tex](paper/main_mdpi.tex) — Full manuscript LaTeX source
+- [paper/supplement_mdpi.tex](paper/supplement_mdpi.tex) — Supplementary LaTeX source
 - [paper/supplement.pdf](paper/supplement.pdf) — Supplementary materials with detailed results
 
 

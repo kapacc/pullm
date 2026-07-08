@@ -54,7 +54,7 @@
 \corres{Correspondence: kacper\_paczutkowski@sggw.edu.pl}
 
 % REV: Abstract updated with quantitative results and explicit gains over Naive, per Reviewer 2.
-\abstract{We study positive-unlabeled (PU) learning for classifying Polish texts intended for large-language-model training. The paper presents a Python reimplementation of the training and evaluation pipeline from earlier work, together with preprocessing tailored to the SpeakLeash corpora used in our experiments. We evaluate six PU methods: naive, clust, strict-lassclust, non-strict-lassclust, lassojoint, and spy under both classic and MVC non-SCAR labelling schemes. Across the benchmark, the best F1 reaches 0.906 on open subtitles corpus under classic labelling and 0.900 under MVC labelling; the largest absolute gain over the Naive baseline is 0.811 F1 points on ulotki medyczne and 0.758 on plwiki in the classic setting. The experimental workflow supports multiple labelling rates c calc and repeated random seeds, and evaluates models with AUC, PR-AUC, and F1 as the main metrics. Our study focuses on six SpeakLeash datasets spanning different domains: plwiki, open subtitles corpus, job offers corpus, ISAP corpus, ulotki medyczne, and wolne lektury corpus. For each dataset, we construct a binary PU setup from the quality field, where HIGH is treated as positive and LOW is negative, while other values are removed. The resulting preprocessed tables retain only the selected linguistic and structural features, rescale numeric variables to the $[0,1]$ range, and remove the raw text column.}
+\abstract{We study positive-unlabeled (PU) learning for classifying Polish texts intended for large-language-model training. We evaluate six PU methods: naive, clust, strict-lassclust, non-strict-lassclust, lassojoint, and spy under both classic and MVC non-SCAR labelling schemes. Across the benchmark, the best F1 reaches 0.906 on open subtitles corpus under classic labelling and 0.900 under MVC labelling; the largest absolute gain over the Naive baseline is 0.811 F1 points on ulotki medyczne and 0.758 on plwiki in the classic setting. The experimental workflow supports multiple labelling rates c calc and repeated random seeds, and evaluates models with AUC, PR-AUC, and F1 as the main metrics. Our study focuses on six SpeakLeash datasets spanning different domains: plwiki, open subtitles corpus, job offers corpus, ISAP corpus, ulotki medyczne, and wolne lektury corpus. For each dataset, we construct a binary PU setup from the quality field, where HIGH is treated as positive and LOW is negative, while other values are removed. The resulting preprocessed tables retain only the selected linguistic and structural features, rescale numeric variables to the $[0,1]$ range, and remove the raw text column.}
 
 % REV: Keywords updated (Bielik.AI removed, data cleaning added) per Reviewer 2.
 \keyword{positive-unlabeled learning; text quality; Polish texts; SpeakLeash; natural language processing; data cleaning}
@@ -86,7 +86,7 @@ This observation reinforces the need for principled PU methods that explicitly m
 \item \rev{Evaluation under two different non-SCAR labeling mechanisms.}
 \item \rev{Cross-domain study across six heterogeneous SpeakLeash datasets.}
 \item \rev{Practical recommendations for PU-learning deployment in LLM data filtering.}
-\item \rev{Open-source Python implementation enabling reproducible research.}
+\item \rev{Open-source Python implementation enabling reproducible research. The paper presents a Python reimplementation of the training and evaluation pipeline from earlier work, together with preprocessing tailored to the SpeakLeash corpora used in our experiments. }
 \end{itemize}
 
 % REV: Novelty table added to clarify substantive innovations vs earlier work, per Reviewers 1 and 3.
@@ -648,5 +648,32 @@ Version~0.3.51; PyPI: Warsaw, Poland, 2024.
 Available online: \url{https://pypi.org/project/speakleash/}
 (accessed on 3~July~2026).
 
-\end{thebibliography}
+\end{thebibliography} 
+
+\supplementary{The following supporting information can be downloaded at:
+\url{https://github.com/kapacc/pullm/blob/master/paper/supplement.pdf},
+Table~S1: Feature descriptions; Tables~S2--S13: Detailed benchmark results per dataset and labelling strategy.}
+
+\authorcontributions{Conceptualization, K.F. and K.P.; methodology, K.F. and K.P.;
+software, K.P.; validation, K.F. and K.P.; formal analysis, K.F. and K.P.;
+investigation, K.P.; resources, K.F.; data curation, K.P.;
+writing---original draft preparation, K.P.; writing---review and editing, K.F.;
+supervision, K.F.; project administration, K.F.
+All authors have read and agreed to the published version of the manuscript.}
+
+\funding{This research received no external funding.}
+
+\institutionalreview{Not applicable.}
+
+\informedconsent{Not applicable.}
+
+\dataavailability{The Python code and supplementary results are available at
+\url{https://github.com/kapacc/pullm}.
+The SpeakLeash datasets are publicly available via \url{https://pypi.org/project/speakleash/}.}
+
+\acknowledgments{The authors thank the SpeakLeash community for providing
+open-access Polish corpora used in this study.}
+
+\conflictsofinterest{The authors declare no conflicts of interest.}
+
 \end{document}
