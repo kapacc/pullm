@@ -23,8 +23,10 @@
 \soulregister\textbf7
 \soulregister\emph7
 
+\IfFileExists{supplement_mdpi.xr.aux}{\externaldocument{supplement_mdpi.xr}}{%
 \IfFileExists{supplement_mdpi.aux}{\externaldocument{supplement_mdpi}}{%
-\IfFileExists{paper/supplement_mdpi.aux}{\externaldocument{paper/supplement_mdpi}}{}}
+\IfFileExists{paper/supplement_mdpi.xr.aux}{\externaldocument{paper/supplement_mdpi.xr}}{%
+\IfFileExists{paper/supplement_mdpi.aux}{\externaldocument{paper/supplement_mdpi}}{}}}}
 
 \setlength{\headheight}{20pt}
 \addtolength{\topmargin}{-7pt}

@@ -13,8 +13,10 @@
 \author{}
 \date{}
 
+\IfFileExists{main_mdpi.xr.aux}{\externaldocument{main_mdpi.xr}}{%
 \IfFileExists{main_mdpi.aux}{\externaldocument{main_mdpi}}{%
-\IfFileExists{paper/main_mdpi.aux}{\externaldocument{paper/main_mdpi}}{}}
+\IfFileExists{paper/main_mdpi.xr.aux}{\externaldocument{paper/main_mdpi.xr}}{%
+\IfFileExists{paper/main_mdpi.aux}{\externaldocument{paper/main_mdpi}}{}}}}
 
 \begin{document}
 \maketitle
