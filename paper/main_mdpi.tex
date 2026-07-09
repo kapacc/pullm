@@ -94,7 +94,7 @@ This observation reinforces the need for principled PU methods that explicitly m
 
 \begin{table}[t]
 \centering
-\caption{Substantive novelty of the present manuscript relative to the our earlier non-SCAR study.}
+\caption{Substantive novelty of the present manuscript relative to our earlier non-SCAR study.}
 \label{tab:novelty_comparison}
 \small
 \begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
@@ -144,10 +144,12 @@ Throughout this work, we adopt the \emph{single-scenario} formulation of PU lear
 \toprule
 \textbf{Method} & \textbf{Type} & \textbf{Handles non-SCAR} & \textbf{Computational Cost} \\
 \midrule
-Naive      & Baseline PU           & No      & Low    \\
-Clust      & Cluster-based PU      & Yes & Medium \\
-LassoJoint & Propensity-aware PU   & Partial     & Medium \\
-Spy        & Reliable-negative PU  & Partial & Medium \\
+Naive           & Baseline PU              & No      & Low    \\
+Clust           & Cluster-based PU         & Yes     & Medium \\
+S-LassClust     & Cluster-sparse PU        & Yes     & High   \\
+NS-LassClust    & Cluster-sparse PU        & Yes     & High   \\
+LassoJoint      & Propensity-aware PU      & Partial & Medium \\
+Spy             & Reliable-negative PU     & Partial & Medium \\
 \bottomrule
 \end{tabular}
 \end{table}
